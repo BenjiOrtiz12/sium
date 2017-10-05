@@ -164,7 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Jadjoubran\LaravelAngular\Provider\LaravelServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
