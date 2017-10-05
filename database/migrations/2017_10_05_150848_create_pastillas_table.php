@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSexoTable extends Migration
+class CreatePastillasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,14 @@ class CreateSexoTable extends Migration
      * @return void
      */
     public function up()
-    {//enserio si es necesaria esta tabla :v
-        Schema::create('sexo', function (Blueprint $table) {
+    {
+        Schema::create('pastillas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sexo');
+            $table->enum('type',['tabletas','capsulas']);
+            $table->enum('clasification',['bajo','normal','regular','alto','rp']);
+            $table->string('name');
+            $table->date('lote');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateSexoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sexo');
+        Schema::dropIfExists('pastillas');
     }
 }
