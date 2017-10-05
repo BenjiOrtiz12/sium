@@ -87,5 +87,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    
+    <script src="{{ asset('sium/src/main.ts') }}"></script>
+    
 </body>
 </html>
