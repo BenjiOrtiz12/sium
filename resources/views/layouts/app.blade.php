@@ -1,45 +1,283 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="{{asset('img/favicon.ico')}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('pestaña')</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <!-- Animation library for notifications   -->
+    <link href="{{asset('css/animate.min.css')}}" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="{{asset('css/light-bootstrap-dashboard.css')}}" rel="stylesheet"/>
+
+    <link href="{{asset('css/sweetalert.css')}}" rel="stylesheet" />
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{{asset('css/demo.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="{{asset('css/pe-icon-7-stroke.css')}}" rel="stylesheet" />
+
 </head>
 <body>
-    <div id="app">
-        <nav class="level">
-          <p class="level-item has-text-centered">
-            <a class="link is-info">Home</a>
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info">Menu</a>
-          </p>
-          <p class="level-item has-text-centered">
-            <img src="http://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info">Reservations</a>
-          </p>
-          <p class="level-item has-text-centered">
-            <a class="link is-info">Contact</a>
-          </p>
-        </nav>
-    </div>
-   <!-- no entiendo por que en la vista esto aparece dentro me confunde integre bulma desde npm pero igual no se como integrarlo :v -->
- @yield('content')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    
-    <script src="{{ asset('sium/src/main.ts') }}"></script>
-    
+<div class="wrapper">
+    <div class="sidebar" data-color="azure" data-image="{{asset('img/sidebar-5.jpg')}}">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+        
+        <div class="sidebar-wrapper">
+            <div class="logo">
+
+            @if (Auth::guest())
+                <a href="{{ url("/login") }}" class="simple-text">Ingresar al sistema</a>
+            @else
+
+                <a href="#!" class="simple-text">
+                    MyHospital
+                </a>
+            </div>
+
+            <ul class="nav">
+              {{--   <li class="active">
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li> --}}
+                <li>
+                    <a href="{{url('admin/paciente')}}">
+                        <i class="pe-7s-user"></i>
+                        <p>Pacientes</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('admin/medica')}}">
+                        <i class="pe-7s-note2"></i>
+                        <p>Medicamentos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Generar Etiqueta</p>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="#">
+                        <i class="pe-7s-science"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li> --}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {{-- <a class="navbar-brand" href="#">Dashboard</a> --}}
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            @yield('etiqueta')
+                        </li>
+                       {{--  <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret hidden-sm hidden-xs"></b>
+                                    <span class="notification hidden-sm hidden-xs">5</span>
+                                    <p class="hidden-lg hidden-md">
+                                        5 Notifications
+                                        <b class="caret"></b>
+                                    </p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li> --}}
+                        
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                       {{--  <li>
+                           <a href="">
+                               <p>Account</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+                                        Dropdown
+                                        <b class="caret"></b>
+                                    </p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                              </ul>
+                        </li> --}}
+                        <li>
+                            <a><form action="{{ url('/logout') }}" method="POST"> {{ csrf_field() }} <button style="border: none; background: none;">Salir</button></form> </a>
+
+                        </li>
+                        <li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">@yield('titulo')</h4>
+                                <p class="category">@yield('subtitulo')</p>
+                            </div>
+                            <div class="container-fluid">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+       {{--  <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+              
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="#!">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
+        </footer> --}}
+
+    </div>
+</div>
+
+@endif
+
+
+    <!--   Core JS Files   -->
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
+          @include('sweet::alert')
 </body>
+    <script src="{{asset('js/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
+
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="{{asset('js/bootstrap-checkbox-radio-switch.js')}}"></script>
+    <!--  Charts Plugin -->
+    <script src="{{asset('js/bootstrap-notify.js')}}"></script>
+
+    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+
+
+    <script src="{{asset('js/chartist.min.js')}}"></script>
+
+    <!--  Notifications Plugin    -->
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script src="{{asset('js/light-bootstrap-dashboard.js')}}"></script>
+
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="{{asset('js/demo.js')}}"></script>
+
+   {{--  <script type="text/javascript">
+        $(document).ready(function(){
+
+            demo.initChartist();
+
+            $.notify({
+                icon: 'pe-7s-gift',
+                message: "hola :V"
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+        });
+    </script> --}}
+
+
+
+
+    
+
 </html>
+
