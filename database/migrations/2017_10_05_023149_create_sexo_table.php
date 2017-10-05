@@ -12,10 +12,10 @@ class CreateSexoTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//enserio si es necesaria esta tabla :v
         Schema::create('sexo', function (Blueprint $table) {
             $table->increments('id');
-             $table->string('sexo');
+            $table->string('sexo');
             $table->timestamps();
         });
     }
