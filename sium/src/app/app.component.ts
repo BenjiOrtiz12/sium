@@ -8,11 +8,13 @@ import {User} from './User';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  user:User;
   constructor(private http:HttpClient){}
 
   ngOnInit(){
   	this.http.get<User>('http://127.0.0.1:8000/api/auth').subscribe(data=>{
   		console.log(data);
+      this.user=data;
   	});
   }
 }
